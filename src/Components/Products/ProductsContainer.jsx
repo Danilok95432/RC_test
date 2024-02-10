@@ -1,12 +1,13 @@
 import { connect } from "react-redux";
 import Products from './Products'
-import { setProductsAC } from "../../redux/productsReducer";
+import { setLoadMoreAc, setProductsAC } from "../../redux/productsReducer";
 
 
 let mapStateToProps = (state) =>{
     return{
         products: state.products.products,
-        activeCategory: state.categories.activeCategory
+        activeCategory: state.categories.activeCategory,
+        loadMore: state.products.loadMore,
     }
 }
 
@@ -15,6 +16,9 @@ let mapDispatchToProps = (dispatch) =>{
         setProducts: (products) => {
             dispatch( setProductsAC(products) )
         },
+        setLoadMore: (flag) => {
+            dispatch( setLoadMoreAc(flag) )
+        }
     }
 }
 

@@ -1,29 +1,44 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './Products.module.css'
 import axios from "axios"
 
 const Products = (props) => {
 
+    const [limit, setLimit] = useState(10)
+
     useEffect(() => {
         if(props.activeCategory == 'all')
-            axios.get(`https://dummyjson.com/products`)
+            axios.get(`https://dummyjson.com/products?limit=10&skip=0`)
             .then(res => {
-                props.setProducts(res.data)
+                props.setProducts(res.data.products)
             })
         else
             axios.get(`https://dummyjson.com/products/category/${props.activeCategory}`)
                 .then(res => {
-                    props.setProducts(res.data)
+                    props.setProducts(res.data.products)
                 })
     }, [props.activeCategory])
 
-    console.log(props.products)
+    useEffect(() => {
+        console.log(1)
+        let nextLimit = limit + 10
+        axios.get(`https://dummyjson.com/products?limit=${nextLimit}&skip=0`)
+            .then(res => {
+                props.setProducts(res.data.products)
+            })
+        props.setLoadMore(false)
+        setLimit(nextLimit)
+    }, [props.loadMore])
+
+    
+    console.log(props)
 
     return(
+        <>
         <div className={styles.products}>
             {
                 props.products.length != 0 ?
-                props.products.products.map(product => {
+                props.products.map(product => {
                     return(
                         <div className={styles.product} key={product.id}>
                             <div className={styles.sales}>
@@ -56,9 +71,21 @@ const Products = (props) => {
                     )
                 })
                 :
-                null
+                <div className={styles.skeleton}>
+                    <div className={styles.vector_skeleton}></div>
+                </div>
             }
         </div>
+        {
+                props.loadMore == true ?
+                <div className={styles.preloader}>
+                    <div className={styles.vector_preloader}></div>
+                    <span>loading</span>
+                </div>
+                :
+                null
+            }
+        </>
     )
 }
 

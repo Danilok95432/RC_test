@@ -23,8 +23,6 @@ const Header = (props) => {
         setActive(category)
     }
 
-    console.log(props.categories, props.activeCategory)
-
     return(
         <header>
             <button id={styles.search}></button>
@@ -37,12 +35,6 @@ const Header = (props) => {
                             className={element == active? styles.categories_element_active : styles.categories_element} 
                             key={element}
                             onClick={() => handleActiveCategory(element)}>
-                                { 
-                                element == active ?
-                                <div className={styles.choosed}></div>
-                                :
-                                null
-                                }
                                 <span>{element}</span>
                             </li>
                         })

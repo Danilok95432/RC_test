@@ -1,4 +1,5 @@
 import './App.css'
+import FooterContainer from './Components/Footer/FooterContainer'
 import HeaderContainer from './Components/Header/HeaderContainer'
 import ProductsContainer from './Components/Products/ProductsContainer'
 
@@ -11,6 +12,7 @@ function App() {
       <main>
         <ProductsContainer />
       </main>
+      <FooterContainer />
     </>
   )
 }

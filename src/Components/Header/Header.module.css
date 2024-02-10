@@ -1,7 +1,7 @@
 header{
     width: 100%;
     background: #EFEEF4;
-    border: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -48,16 +48,16 @@ header{
 
 .categories{
     width: 80%;
-    height: 28px;
 }
 
 .categories ul{
+    width: 100%;
     list-style: none;
     display: flex;
     flex-direction: row;
     overflow: hidden;
     overflow-x: scroll;
-    gap: 1px;
+    gap: 3px;
     border-radius: 4px;
 }
 
@@ -67,6 +67,7 @@ header{
   }
 
 .categories_element{
+    height: 30px;
     cursor: pointer;
     background: #ffffff;
     display: flex;
@@ -79,6 +80,8 @@ header{
 }
 
 .categories_element_active{
+    width: 20%;
+    height: 30px;
     cursor: pointer;
     background: #3625FF;
     color: #ffffff;
