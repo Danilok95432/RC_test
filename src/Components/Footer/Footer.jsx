@@ -8,11 +8,8 @@ const Footer = (props) => {
         threshold: 0.8,
     })
 
-    console.log(inView)
-
     useEffect(() => {
         if(inView){
-            console.log('load')
             props.setLoadMore(true)
         }
     }, [inView])

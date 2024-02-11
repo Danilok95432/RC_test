@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import Header from "./Header";
 import { setActiveCategoryAC, setCategoriesAC } from "../../redux/categoriesReducer";
+import { switchModalModeAC } from "../../redux/overlayReducer";
 
 
 let mapStateToProps = (state) =>{
@@ -17,6 +18,9 @@ let mapDispatchToProps = (dispatch) =>{
         },
         setActiveCategory: (category) => {
             dispatch( setActiveCategoryAC(category) )
+        },
+        switchModalMode: (flag) => {
+            dispatch( switchModalModeAC(flag) )
         },
     }
 }

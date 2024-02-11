@@ -23,6 +23,10 @@ const Header = (props) => {
         setActive(category)
     }
 
+    const handleCartButton = () => {
+        props.switchModalMode(true)
+    }
+
     return(
         <header>
             <button id={styles.search}></button>
@@ -35,6 +39,12 @@ const Header = (props) => {
                             className={element == active? styles.categories_element_active : styles.categories_element} 
                             key={element}
                             onClick={() => handleActiveCategory(element)}>
+                                {
+                                    element == active ?
+                                    <div className={styles.choosed}></div>
+                                    :
+                                    null
+                                }
                                 <span>{element}</span>
                             </li>
                         })
@@ -43,7 +53,7 @@ const Header = (props) => {
                     }
                 </ul>
             </nav>
-            <button id={styles.cart}>
+            <button id={styles.cart} onClick={() => handleCartButton()}>
                 <div className={styles.vector_cart}></div>
                 <span>cart</span>
             </button>

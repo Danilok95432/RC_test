@@ -20,7 +20,6 @@ const Products = (props) => {
     }, [props.activeCategory])
 
     useEffect(() => {
-        console.log(1)
         let nextLimit = limit + 10
         axios.get(`https://dummyjson.com/products?limit=${nextLimit}&skip=0`)
             .then(res => {
@@ -30,8 +29,10 @@ const Products = (props) => {
         setLimit(nextLimit)
     }, [props.loadMore])
 
-    
-    console.log(props)
+    const handleBuyBtn = (product) => {
+        console.log(product)
+        props.addToCart(product)
+    }
 
     return(
         <>
@@ -59,7 +60,7 @@ const Products = (props) => {
                                     <span>{product.description}</span>
                                     <button>Read more</button>
                                 </div>
-                                <div className={styles.buy}>
+                                <div className={styles.buy} onClick={() => handleBuyBtn(product)}>
                                     <button id={styles.buy_btn}>
                                         <div id={styles.cart}></div>
                                         <span>${product.price}</span>

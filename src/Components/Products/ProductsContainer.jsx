@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import Products from './Products'
 import { setLoadMoreAc, setProductsAC } from "../../redux/productsReducer";
+import { addToCartAC } from "../../redux/cartReducer";
 
 
 let mapStateToProps = (state) =>{
@@ -18,7 +19,10 @@ let mapDispatchToProps = (dispatch) =>{
         },
         setLoadMore: (flag) => {
             dispatch( setLoadMoreAc(flag) )
-        }
+        },
+        addToCart: (product) => {
+            dispatch( addToCartAC(product) )
+        },
     }
 }
 
