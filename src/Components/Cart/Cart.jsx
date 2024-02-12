@@ -9,6 +9,14 @@ const Cart = (props) => {
         props.switchModalMode(false)
     }
 
+    const handleChangeQuantity = (product, changes) => {
+        props.changeQuantity(product, changes)
+    }
+
+    const handleDeleteProduct = (product) => {
+        props.removeItem(product)
+    }
+
     return(
         <>
         {
@@ -30,22 +38,25 @@ const Cart = (props) => {
                         :
                         props.cart.map(product => {
                             return(
-                                <div className={styles.item_cart} key={product.id}>
+                                <div className={styles.item_cart} key={product.item.id}>
                                     <div className={styles.item_cont}>
-                                        <img className={styles.item_img} src={product.images[0]} alt="" />
+                                        <img className={styles.item_img} src={product.item.images[0]} alt="" />
                                         <div className={styles.item_desc}>
                                             <div className={styles.item_name}>
-                                                <span>{product.brand}</span>
-                                                <span>{product.title}</span>
+                                                <span>{product.item.brand}</span>
+                                                <span>{product.item.title}</span>
                                             </div>
                                             <div className={styles.counter}>
-                                                <button id={styles.minus_btn}></button>
-                                                <div className={styles.item_number}>1</div>
-                                                <button id={styles.plus_btn}></button>
+                                                <button id={styles.minus_btn} onClick={() => handleChangeQuantity(product, -1)}></button>
+                                                <div className={styles.item_number}>{product.quantity}</div>
+                                                <button id={styles.plus_btn} onClick={() => handleChangeQuantity(product, 1)}></button>
                                             </div>
                                         </div>
                                     </div>
-                                    <span className={styles.price}>${product.price}</span>
+                                    <span className={styles.price}>${product.item.price * product.quantity}</span>
+                                    <button id={styles.delete_product} onClick={() => handleDeleteProduct(product)}>
+                                        <div className={styles.delete_vector}></div>
+                                    </button>
                                 </div>
                             )
                         })

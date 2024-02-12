@@ -19,6 +19,7 @@ const Header = (props) => {
     }, [])
 
     const handleActiveCategory = (category) => {
+        props.setLoadMore(false)
         props.setActiveCategory(category)
         setActive(category)
     }
@@ -36,7 +37,7 @@ const Header = (props) => {
                         props.categories.length != 0 ?
                         props.categories.map(element => {
                             return <li 
-                            className={element == active? styles.categories_element_active : styles.categories_element} 
+                            className={element == active ? styles.categories_element_active : styles.categories_element} 
                             key={element}
                             onClick={() => handleActiveCategory(element)}>
                                 {

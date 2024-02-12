@@ -6,6 +6,8 @@ const Products = (props) => {
 
     const [limit, setLimit] = useState(10)
 
+    console.log(props.activeCategory, props.products, props.loadMore)
+
     useEffect(() => {
         if(props.activeCategory == 'all')
             axios.get(`https://dummyjson.com/products?limit=10&skip=0`)
@@ -20,13 +22,21 @@ const Products = (props) => {
     }, [props.activeCategory])
 
     useEffect(() => {
-        let nextLimit = limit + 10
-        axios.get(`https://dummyjson.com/products?limit=${nextLimit}&skip=0`)
-            .then(res => {
-                props.setProducts(res.data.products)
-            })
-        props.setLoadMore(false)
-        setLimit(nextLimit)
+        console.log(props.loadMore)
+        if(props.activeCategory == 'all')
+        {
+            let nextLimit = limit + 10
+            axios.get(`https://dummyjson.com/products?limit=${nextLimit}&skip=0`)
+                .then(res => {
+                    props.setProducts(res.data.products)
+                })
+            props.setLoadMore(false)
+            setLimit(nextLimit)
+        }
+        else{
+            let nextLimit = 10
+            setLimit(nextLimit)
+        }
     }, [props.loadMore])
 
     const handleBuyBtn = (product) => {
@@ -78,7 +88,7 @@ const Products = (props) => {
             }
         </div>
         {
-                props.loadMore == true ?
+                props.loadMore == true && props.activeCategory == 'all' ?
                 <div className={styles.preloader}>
                     <div className={styles.vector_preloader}></div>
                     <span>loading</span>

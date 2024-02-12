@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import Header from "./Header";
 import { setActiveCategoryAC, setCategoriesAC } from "../../redux/categoriesReducer";
 import { switchModalModeAC } from "../../redux/overlayReducer";
+import { setLoadMoreAc } from "../../redux/productsReducer";
 
 
 let mapStateToProps = (state) =>{
@@ -21,6 +22,9 @@ let mapDispatchToProps = (dispatch) =>{
         },
         switchModalMode: (flag) => {
             dispatch( switchModalModeAC(flag) )
+        },
+        setLoadMore: (flag) => {
+            dispatch( setLoadMoreAc(flag) )
         },
     }
 }

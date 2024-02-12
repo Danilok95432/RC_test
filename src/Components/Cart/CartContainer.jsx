@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import Cart from "./Cart";
 import { switchModalModeAC } from "../../redux/overlayReducer";
+import { changeQuantityProduct, removeItemFromCartAC } from "../../redux/cartReducer";
 
 
 let mapStateToProps = (state) =>{
@@ -15,6 +16,12 @@ let mapDispatchToProps = (dispatch) =>{
         switchModalMode: (flag) => {
             dispatch( switchModalModeAC(flag) )
         },
+        changeQuantity: (product, changes) => {
+            dispatch( changeQuantityProduct(product, changes) )
+        },
+        removeItem: (product) => {
+            dispatch( removeItemFromCartAC(product) )
+        }
     }
 }
 
