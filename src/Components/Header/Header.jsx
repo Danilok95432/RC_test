@@ -86,9 +86,17 @@ const Header = (props) => {
                     }
                 </ul>
             </nav>
-            <button id={styles.cart} onClick={() => handleCartButton()}>
-                <div className={styles.vector_cart}></div>
+            <button id={props.counterItems != 0 ? styles.cart_not_empty : styles.cart} onClick={() => handleCartButton()}>
+                <div className={props.counterItems != 0 ? styles.vector_not_empty_cart : styles.vector_cart}></div>
                 <span>cart</span>
+                {
+                    props.counterItems != 0 ?
+                    <div className={styles.counter}> 
+                        <span>{props.counterItems}</span>
+                    </div>
+                    :
+                    null
+                }
             </button>
         </header>
     )

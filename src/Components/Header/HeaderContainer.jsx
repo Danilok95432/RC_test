@@ -11,6 +11,7 @@ let mapStateToProps = (state) =>{
         categories: state.categories.categories,
         activeCategory: state.categories.activeCategory,
         searchText: state.search.searchText,
+        counterItems: state.cart.counterItems,
     }
 }
 
