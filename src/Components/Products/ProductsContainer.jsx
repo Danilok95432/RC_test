@@ -9,6 +9,7 @@ let mapStateToProps = (state) =>{
         products: state.products.products,
         activeCategory: state.categories.activeCategory,
         loadMore: state.products.loadMore,
+        searchText: state.search.searchText,
     }
 }
 

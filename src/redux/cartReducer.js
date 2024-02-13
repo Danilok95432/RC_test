@@ -5,50 +5,87 @@ const ADD_ITEM_TO_CART = 'ADD-ITEM-TO-CART',
 
 let initialState = {
     cart: [],
+    counterItems: 0,
+    controlSum: 0,
 }
 
 
 const cartReducer = (state = initialState, action) => {
     switch(action.type){
         case ADD_ITEM_TO_CART: {
-            let newItem = null
-            let product = state.cart.filter((product) => product.item == action.item)
-            if(product.length != 0)
-            {
-                let index = state.cart.findIndex(el => el.item == product[0].item)
-                state.cart[index].quantity += 1
-            } 
-            else
-                newItem = {
-                    item: action.item,
-                    quantity: 1
-                }   
-            return{
-                ...state,
-                cart: newItem ? [...state.cart, newItem] : state.cart
+            let newItem = null;
+            let product = state.cart.filter((product) => product.item == action.item);
+            let updatedCart = [];
+            let updatedControlSum = state.controlSum;
+            let updatedCounterItems = state.counterItems;
+          
+            if (product.length != 0) {
+              let index = state.cart.findIndex(el => el.item == product[0].item);
+              updatedControlSum += product[0].item.price;
+              updatedCart = state.cart.map((el, i) => {
+                if (i === index) {
+                  return {
+                    ...el,
+                    quantity: el.quantity + 1
+                  };
+                }
+                return el;
+              });
+            } else {
+              newItem = {
+                item: action.item,
+                quantity: 1
+              };
+              updatedControlSum += action.item.price;
+              updatedCart = [...state.cart, newItem];
             }
-        }
+          
+            return {
+              ...state,
+              cart: updatedCart,
+              controlSum: updatedControlSum,
+              counterItems: updatedCounterItems + 1
+            };
+          }
 
         case REMOVE_ITEM_FROM_CART: {
-            let newState = {...state};
-            newState.cart = [...state.cart];
-            let index = newState.cart.indexOf(action.item)
-            newState.cart.splice(index, 1)
-            return newState
+            const updatedCart = [...state.cart];
+            const updatedControlSum = state.controlSum - (action.item.item.price * action.item.quantity);
+            const updatedCounterItems = state.counterItems - action.item.quantity;
+            const index = updatedCart.indexOf(action.item);
+            updatedCart.splice(index, 1);
+            return {
+            ...state,
+            cart: updatedCart,
+            controlSum: updatedControlSum,
+            counterItems: updatedCounterItems
+            }
         }
 
         case CHANGE_QUANTITY: {
-            let newState = {...state};
-            newState.cart = [...state.cart];
-            let index = state.cart.findIndex(el => el.item == action.product.item)
-            newState.cart[index].quantity += action.changes
-            if(newState.cart[index].quantity <= 0){
-                newState.cart.splice(index, 1)
+            let updatedCart = [];
+            let updatedControlSum = state.controlSum;
+            let updatedCounterItems = state.counterItems;
+            let index = state.cart.findIndex(el => el.item == action.product.item);
+              updatedCart = state.cart.map((el, i) => {
+                if (i === index) {
+                  return {
+                    ...el,
+                    quantity: el.quantity + action.changes
+                  };
+                }
+                return el;
+              });
+            if(action.changes > 0)
+                updatedControlSum += action.product.item.price
+            else updatedControlSum -= action.product.item.price
+            if(updatedCart[index].quantity <= 0){
+                updatedCart.splice(index, 1)
             }
             return{
-                ...newState,
-                ...newState.cart,
-                cart: newState.cart
+                cart: updatedCart,
+                counterItems: updatedCounterItems + action.changes,
+                controlSum: updatedControlSum
             }
         }
     }

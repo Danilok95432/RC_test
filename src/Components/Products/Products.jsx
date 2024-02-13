@@ -6,8 +6,6 @@ const Products = (props) => {
 
     const [limit, setLimit] = useState(10)
 
-    console.log(props.activeCategory, props.products, props.loadMore)
-
     useEffect(() => {
         if(props.activeCategory == 'all')
             axios.get(`https://dummyjson.com/products?limit=10&skip=0`)
@@ -22,7 +20,6 @@ const Products = (props) => {
     }, [props.activeCategory])
 
     useEffect(() => {
-        console.log(props.loadMore)
         if(props.activeCategory == 'all')
         {
             let nextLimit = limit + 10
@@ -45,7 +42,7 @@ const Products = (props) => {
     }
 
     return(
-        <>
+        <main style={props.products.length == 0 ? {height: "100vh"} : null}>
         <div className={styles.products}>
             {
                 props.products.length != 0 ?
@@ -83,7 +80,16 @@ const Products = (props) => {
                 })
                 :
                 <div className={styles.skeleton}>
-                    <div className={styles.vector_skeleton}></div>
+                    {
+                        props.searchText == '' ?
+                        <div className={styles.vector_skeleton}></div>
+                        :
+                        <>
+                            <div className={styles.vector_preloader}></div>
+                            <h2>Ничего не найдено. 
+                                Попробуйте изменить поисковый запрос</h2>
+                        </>
+                    }
                 </div>
             }
         </div>
@@ -96,7 +102,7 @@ const Products = (props) => {
                 :
                 null
             }
-        </>
+        </main>
     )
 }
 

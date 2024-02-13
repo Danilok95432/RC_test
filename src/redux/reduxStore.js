@@ -13,17 +13,19 @@ import categoriesReducer from "./categoriesReducer";
 import productsReducer from "./productsReducer";
 import overlayReducer from "./overlayReducer";
 import cartReducer from "./cartReducer";
+import searchReducer from './searchReducer';
  
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['cart', 'products', 'categories'],
+  blacklist: ['cart', 'products', 'categories', 'search', 'overlay'],
 }
 
 const rootReducer = combineReducers({
     categories: categoriesReducer,
     products: productsReducer,
     cart: cartReducer,
+    search: searchReducer,
     overlay: overlayReducer
 })
  

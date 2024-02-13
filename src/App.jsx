@@ -11,9 +11,7 @@ function App() {
   return (
     <>
         <HeaderContainer />
-        <main>
-          <ProductsContainer />
-        </main>
+        <ProductsContainer />
         <FooterContainer />
         <OverlayContainer />
         <CartContainer />

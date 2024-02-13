@@ -3,7 +3,7 @@ import styles from './Cart.module.css'
 
 const Cart = (props) => {
 
-    console.log(props.cart)
+    console.log(props.counterItems, props.controlSum)
 
     const handleCloseBtn = () => {
         props.switchModalMode(false)
@@ -47,9 +47,13 @@ const Cart = (props) => {
                                                 <span>{product.item.title}</span>
                                             </div>
                                             <div className={styles.counter}>
-                                                <button id={styles.minus_btn} onClick={() => handleChangeQuantity(product, -1)}></button>
+                                                <button id={styles.minus_btn} onClick={() => handleChangeQuantity(product, -1)}>
+                                                    <div className={styles.minus_vector}></div>
+                                                </button>
                                                 <div className={styles.item_number}>{product.quantity}</div>
-                                                <button id={styles.plus_btn} onClick={() => handleChangeQuantity(product, 1)}></button>
+                                                <button id={styles.plus_btn} onClick={() => handleChangeQuantity(product, 1)}>
+                                                    <div className={styles.plus_vector}></div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -62,6 +66,15 @@ const Cart = (props) => {
                         })
                     }
                 </div>
+                {
+                    props.cart.length != 0 ?
+                    <div className={styles.info_order}>
+                        <span>{props.counterItems} positions</span>
+                        <h2>${props.controlSum}</h2>
+                    </div>
+                    :
+                    null
+                }
                 <button className={styles.next_btn}>
                     {
                         props.cart.length == 0 ?

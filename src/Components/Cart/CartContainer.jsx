@@ -8,6 +8,8 @@ let mapStateToProps = (state) =>{
     return{
         isActiveModal: state.overlay.isActiveModal,
         cart: state.cart.cart,
+        counterItems: state.cart.counterItems,
+        controlSum: state.cart.controlSum,
     }
 }
 
