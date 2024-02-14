@@ -18,7 +18,7 @@ import searchReducer from './searchReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['cart', 'products', 'categories', 'search', 'overlay'],
+  blacklist: ['products', 'categories', 'search', 'overlay'],
 }
 
 const rootReducer = combineReducers({

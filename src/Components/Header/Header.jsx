@@ -2,12 +2,17 @@ import { useEffect, useRef } from 'react'
 import styles from './Header.module.css'
 import axios from 'axios'
 import { useState } from 'react'
+import {NavLink, useSearchParams } from 'react-router-dom'
 
 const Header = (props) => {
 
     const [active, setActive] = useState('all')
     const [search, setSearch] = useState(false)
     let searchRef = useRef('')
+
+    const [searchParams, setSearchParams] = useSearchParams()
+    let category = searchParams.get('category')
+    if(category == null) category == 'all'
 
     useEffect(() => {
         axios.get('https://dummyjson.com/products/categories')
@@ -19,6 +24,11 @@ const Header = (props) => {
                 props.setCategories(categories)
              })
     }, [])
+
+    useEffect(() => {
+        if(category == null) category == 'all'
+        else handleActiveCategory(category)
+    }, [searchParams])
 
     const handleActiveCategory = (category) => {
         props.setLoadMore(false)
@@ -68,18 +78,17 @@ const Header = (props) => {
                     {
                         props.categories.length != 0 ?
                         props.categories.map(element => {
-                            return <li 
-                            className={element == active ? styles.categories_element_active : styles.categories_element} 
-                            key={element}
-                            onClick={() => handleActiveCategory(element)}>
+                            return <NavLink to={`/products?category=${element}`} className={element == props.activeCategory ? styles.categories_element_active : styles.categories_element} 
+                            key={element} onClick={() => handleActiveCategory(element)}>
+                                <li className={styles.elem_list}>
                                 {
-                                    element == active ?
+                                    element == props.activeCategory ?
                                     <div className={styles.choosed}></div>
                                     :
                                     null
                                 }
                                 <span>{element}</span>
-                            </li>
+                            </li></NavLink>
                         })
                         :
                         null

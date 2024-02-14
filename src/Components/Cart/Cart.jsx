@@ -3,8 +3,6 @@ import styles from './Cart.module.css'
 
 const Cart = (props) => {
 
-    console.log(props.counterItems, props.controlSum)
-
     const handleCloseBtn = () => {
         props.switchModalMode(false)
     }
@@ -75,7 +73,7 @@ const Cart = (props) => {
                     :
                     null
                 }
-                <button className={styles.next_btn}>
+                <button className={styles.next_btn} onClick={handleCloseBtn}>
                     {
                         props.cart.length == 0 ?
                         <span>back to products</span>

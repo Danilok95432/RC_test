@@ -4,18 +4,26 @@ import FooterContainer from './Components/Footer/FooterContainer'
 import HeaderContainer from './Components/Header/HeaderContainer'
 import OverlayContainer from './Components/Overlay/OverlayContainer'
 import ProductsContainer from './Components/Products/ProductsContainer'
+import Products from './Components/Products/Products'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 
 function App() {
 
   return (
-    <>
-        <HeaderContainer />
-        <ProductsContainer />
-        <FooterContainer />
-        <OverlayContainer />
-        <CartContainer />
-    </>
+    <BrowserRouter>
+      <>
+          <HeaderContainer />
+          <Routes>
+            <Route path='/' element={<ProductsContainer />}/>
+            <Route path='products' element={<ProductsContainer />}/>
+            <Route path='products?category=:category' element={<ProductsContainer />}/>
+          </Routes>
+          <FooterContainer />
+          <OverlayContainer />
+          <CartContainer />
+      </>
+    </BrowserRouter>
   )
 }
 

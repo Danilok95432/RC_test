@@ -209,3 +209,10 @@ header{
     color: white;
 }
 
+.elem_list{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+

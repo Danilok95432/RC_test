@@ -1,26 +1,32 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './Products.module.css'
 import axios from "axios"
+import { useParams, useSearchParams } from 'react-router-dom'
+import Slider from '../SliderMain/Slider/Slider'
 
 const Products = (props) => {
 
     const [limit, setLimit] = useState(10)
+    const [searchParams, setSearchParams] = useSearchParams()
+    
+    let category = searchParams.get('category')
+    if(category == undefined) category = 'all'
 
     useEffect(() => {
-        if(props.activeCategory == 'all')
+        if(category == 'all')
             axios.get(`https://dummyjson.com/products?limit=10&skip=0`)
             .then(res => {
                 props.setProducts(res.data.products)
             })
         else
-            axios.get(`https://dummyjson.com/products/category/${props.activeCategory}`)
+            axios.get(`https://dummyjson.com/products/category/${category}`)
                 .then(res => {
                     props.setProducts(res.data.products)
                 })
-    }, [props.activeCategory])
+    }, [props.activeCategory, category])
 
     useEffect(() => {
-        if(props.activeCategory == 'all')
+        if(category == 'all')
         {
             let nextLimit = limit + 10
             axios.get(`https://dummyjson.com/products?limit=${nextLimit}&skip=0`)
@@ -53,7 +59,7 @@ const Products = (props) => {
                                 <span className={styles.procent}>{product.discountPercentage}%</span>
                                 <span>off sale</span>
                             </div>
-                            <img src={product.images[0]} alt="" />
+                            <Slider items={product.images}/>
                             <div className={styles.product_container}>
                                 <div className={styles.rating}>
                                     <div className={styles.rating_vector}></div>
