@@ -1,3 +1,11 @@
+@media screen and (max-width: 440px) {
+    #header{
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+}
+
 header{
     width: 100%;
     background: #EFEEF4;
@@ -170,6 +178,11 @@ header{
     align-items: center;
     padding: 0px 8px;
     transition: all 0.3s ease-in-out;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.03em;
 }
 
 .categories_element_active{
@@ -185,6 +198,11 @@ header{
     align-items: center;
     padding: 0px 8px;
     transition: all 0.3s ease-in-out;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.03em;
 }
 
 .categories_element span{

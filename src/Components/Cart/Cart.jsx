@@ -19,7 +19,7 @@ const Cart = (props) => {
         <>
         {
             props.isActiveModal ?
-            <div className={styles.cart} style={{right: '0%'}}>
+            <div id={styles.cart_id} className={styles.cart} style={{right: '0%'}}>
                 <header id={styles.cart_header}>
                     <div id={styles.cart_logo}>
                         <div className={styles.vector_cart}></div>

@@ -1,3 +1,18 @@
+@media screen and (max-width: 440px) {
+    #cart_id{
+        width: 80%;
+    }
+    
+}
+
+@media screen and (max-width: 1023px) {
+    #cart_id{
+        width: 50%;
+    }
+    
+}
+
+
 .cart{
     position: fixed;
     background: #ffffff;
@@ -28,6 +43,11 @@
     flex-direction: row;
     gap: 5px;
     align-items: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.02em;
 }
 
 .vector_cart{
@@ -81,6 +101,11 @@
     gap: 16px;
     overflow-y: scroll;
     overflow-x: hidden;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.02em;
 }
 
 .products_cart::-webkit-scrollbar{
@@ -231,4 +256,18 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.info_order span{
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #5C6970;
+}
+
+.info_order h2{
+    font-family: Inter;
 }

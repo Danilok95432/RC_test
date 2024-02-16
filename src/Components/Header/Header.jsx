@@ -59,7 +59,7 @@ const Header = (props) => {
     }
 
     return(
-        <header onMouseLeave={() => setSearch(false)} >
+        <header id={styles.header} onMouseLeave={() => setSearch(false)} >
             <div className={ search ? styles.search_active : styles.search_cont} onClick={() => handleSeachClick()}>
                 <div className={styles.search}></div>
                 <input className={styles.search_input} style={search ? {display: "flex"} : {display: "none"}}

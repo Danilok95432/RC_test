@@ -7,6 +7,7 @@ import Slider from '../SliderMain/Slider/Slider'
 const Products = (props) => {
 
     const [limit, setLimit] = useState(10)
+    const [err, setErr] = useState()
     const [searchParams, setSearchParams] = useSearchParams()
     
     let category = searchParams.get('category')
@@ -33,6 +34,9 @@ const Products = (props) => {
                 .then(res => {
                     props.setProducts(res.data.products)
                 })
+                .catch(error => {
+                    setErr(true)
+                })
             props.setLoadMore(false)
             setLimit(nextLimit)
         }
@@ -48,7 +52,7 @@ const Products = (props) => {
     }
 
     return(
-        <main style={props.products.length == 0 ? {height: "100vh"} : null}>
+        <main style={props.products.length == 0 || props.searchText != '' ? {height: "100vh"} : null}>
         <div className={styles.products}>
             {
                 props.products.length != 0 ?
@@ -107,7 +111,13 @@ const Products = (props) => {
                 </div>
                 :
                 null
-            }
+        }
+        {
+                err == true ?
+                <button>Загрузить ещё</button>
+                :
+                null
+        }
         </main>
     )
 }
