@@ -1,8 +1,9 @@
-# React + Vite
+Описание технологий:
+    1. База проекта Vite + React. Vite выбран, так как нравится его сборка.
+    2. Для хранения и работы бизнес логики был выбран Redux-toolkit.
+    3. Для синхронизации разных вкладок был использован Redux-persist
+    4. Для работы с сервером использовался Axios
+    5. Для lazy-загрузки продуктов был использован IntersectionObserver
+    6. Для навигации на сайте с помощью параметров адресной строки была использована библиотека react-router-dom
+Для запуска приложения необходимо в терминале запустить команду 'npm run dev'
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
